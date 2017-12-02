@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pizza1" default="build" basedir=".">
+<!-- pizza1 build file
+  Requires JDK's bin and ant's bin on command-line's path (check that javac 
+      and ant work on the command line)
+  Requires database tables set up: use build.xml in subdirectory database.
+  For Oracle, requires env variables ORACLE_USER, ORACLE_PW, ORACLE_SITE
+  ORACLE_SITE should be dbs3.cs.umb.edu:1521:dbs3 inside cs.umb.edu.
+  From outside, use a tunnel and ORACLE_SITE localhost:1521:dbs2 
+  The tunnel uses local port 1521, remote dbs3.cs.umb.edu:1521
+  For MySQL use, requires env vars MYSQL_SITE, MYSQL_USER, MYSQL_PW.
+  MYSQL_SITE should be "localhost:3333" at home (for tunnel 
+  to topcat.cs.umb.edu), and "topcat.cs.umb.edu" at cs.umb.edu.	
+  For HSQLDB use, no user/password info is needed, but you need to
+   start the hsqldb server (see build.xml in subdir database).
+  Most useful targets:
+  ant test   run all unit tests using HSQLDB
+  ant hsqlSysTest  run SystemTest with HSQLDB
+  ant oraSysTest  run SystemTest with Oracle (use tunnel at home)
+  ant mysqlSysTest  run SystemTest with Mysql (use tunnel at home)  
+ -->
+
+	<!--Load environment variables and give them prefix "env." -->
+	<property environment="env"/>
+	<!-- assemble DB URLs from env vars. Examples:
+	 "jdbc:oracle:thin:@localhost:1531:dbs3"  from home, via tunnel
+	 "jdbc:oracle:thin:@dbs3.cs.umb.edu:1521:dbs3" from inside cs.umb.edu firewall
+	 "jdbc:mysql://topcat.cs.umb.edu/joedb" for mysql user joe
+	 "jdbc:mysql://localhost:3333/joedb" when using tunnel to topcat
+	-->	    
+	<property name="ORACLE_URL" value="jdbc:oracle:thin:@${env.ORACLE_SITE}"/>
+	<property name="MYSQL_URL" value = "jdbc:mysql://${env.MYSQL_SITE}/${env.MYSQL_USER}db"/>
+	
+	<property name="classes" location="bin"/>
+
+	<path id="project.classpath">
+		<pathelement location="bin"/>
+		<pathelement location="lib/ojdbc6.jar"/> 
+		<pathelement location="lib/mysql-connector-java-5.1.43-bin.jar"/> 
+		<pathelement location="lib/hsqldb.jar"/>
+		<pathelement location="lib/junit-4.12.jar"/> 
+		<pathelement location="lib/hamcrest-core-1.3.jar"/> 
+	</path>
+	<target name="init">
+		<mkdir dir="${classes}"/>
+	</target>
+	<target name="clean">
+		<delete dir="${classes}"/>
+	</target>
+	<target name="build" depends="init">
+		<echo message="${ant.project.name}: ${ant.file}"/>
+		<javac destdir="${classes}" debug="on" includeantruntime="false">
+			<src path="src"/>
+			<classpath refid="project.classpath"/>
+		</javac>
+	</target>
+	<target name="test" depends="testBL, testDAO"/>
+	<!-- set up "testBL" to run all BL (business layer) unit tests -->
+	<target name="testBL" depends="build">
+		<junit fork="true">
+			<formatter type="brief" usefile="false"/>
+			<test name="cs636.pizza.service.AdminServiceTest1"/>
+			<classpath refid="project.classpath"/>
+		</junit>
+	</target>
+	<!-- set up one target "testDAO" to run all DAO unit tests -->
+	<target name="testDAO" depends="build">
+		<junit fork="true">
+			<formatter type="brief" usefile="false"/>
+			<test name="cs636.pizza.dao.PizzaOrderDAOTest1"/>
+			<test name="cs636.pizza.dao.MenuDAOTest1"/>
+			<classpath refid="project.classpath"/>
+		</junit>
+	</target>
+	<target name="oraSysTest" depends="build">
+		<java fork="true" classname="cs636.pizza.presentation.SystemTest" 
+			failonerror="true" dir="${basedir}">
+			<classpath refid="project.classpath"/>
+			<arg value="${ORACLE_URL}"/>
+			<arg value="${env.ORACLE_USER}"/>
+			<arg value="${env.ORACLE_PW}"/>
+			<arg file="test.dat"/>
+		</java>
+	</target>
+	<target name="mysqlSysTest" depends="build">
+		<java fork="true" classname="cs636.pizza.presentation.SystemTest" 
+			failonerror="true" dir="${basedir}">
+			<classpath refid="project.classpath"/>
+			<arg value="${MYSQL_URL}"/>
+			<arg value="${env.MYSQL_USER}"/>
+			<arg value="${env.MYSQL_PW}"/>
+			<arg file="test.dat"/>
+		</java>
+	</target>
+	<target name="hsqlSysTest" depends="build">
+		<java fork="true" classname="cs636.pizza.presentation.SystemTest" 
+			failonerror="true" dir="${basedir}">
+			<classpath refid="project.classpath"/>
+			<arg file="test.dat"/>
+		</java>
+	</target>
+</project>

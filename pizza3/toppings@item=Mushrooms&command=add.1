@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Error</title>
+</head>
+<body>
+	<h1>Error: cs636.pizza.service.ServiceException: Topping was not added successfully: 
+  cause: java.sql.SQLRecoverableException: IO Error: Got minus one from a read call
+    cause's cause: java.io.IOException: Got minus one from a read call
+ Stack Trace: cs636.pizza.service.ServiceException: Topping was not added successfully: 
+	at cs636.pizza.service.AdminService.addTopping(AdminService.java:65)
+	at cs636.pizza.presentation.web.AdminServlet.manageToppings(AdminServlet.java:181)
+	at cs636.pizza.presentation.web.AdminServlet.doGet(AdminServlet.java:68)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:650)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:799)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1457)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.sql.SQLRecoverableException: IO Error: Got minus one from a read call
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:752)
+	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:662)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:32)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:560)
+	at org.apache.tomcat.dbcp.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
+	at org.apache.tomcat.dbcp.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:257)
+	at org.apache.tomcat.dbcp.pool2.impl.GenericObjectPool.create(GenericObjectPool.java:888)
+	at org.apache.tomcat.dbcp.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:430)
+	at org.apache.tomcat.dbcp.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:359)
+	at org.apache.tomcat.dbcp.dbcp2.PoolingDataSource.getConnection(PoolingDataSource.java:134)
+	at org.apache.tomcat.dbcp.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:1543)
+	at cs636.pizza.dao.DbDAO.startTransaction(DbDAO.java:85)
+	at cs636.pizza.service.AdminService.addTopping(AdminService.java:60)
+	... 26 more
+Caused by: java.io.IOException: Got minus one from a read call
+	at oracle.net.ano.AnoComm.b(Unknown Source)
+	at oracle.net.ano.AnoComm.o(Unknown Source)
+	at oracle.net.ano.Ano.c(Unknown Source)
+	at oracle.net.ano.Ano.negotiation(Unknown Source)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:293)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1452)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:496)
+	... 38 more
+</h1>
+	<br> 
+	<br> 
+	<a href="adminWelcome.html;jsessionid=979CD2516F9D0D7EFF38E474179AB60A"> Back to Admin Menu</a>
+	
+</body>
+</html>

@@ -1,0 +1,192 @@
+[EL Fine]: server: Configured server platform: org.eclipse.persistence.platform.server.NoServerPlatform
+[EL Config]: metadata: The access type for the persistent class [class cs636.pizza.domain.MenuSize] is set to [FIELD].
+[EL Config]: metadata: The access type for the persistent class [class cs636.pizza.domain.PizzaTopping] is set to [FIELD].
+[EL Config]: metadata: The target entity (reference) class for the many to one mapping element [field order] is being defaulted to: class cs636.pizza.domain.PizzaOrder.
+[EL Config]: metadata: The access type for the persistent class [class cs636.pizza.domain.PizzaSize] is set to [FIELD].
+[EL Config]: metadata: The access type for the persistent class [class cs636.pizza.domain.MenuTopping] is set to [FIELD].
+[EL Config]: metadata: The access type for the persistent class [class cs636.pizza.domain.PizzaOrder] is set to [FIELD].
+[EL Config]: metadata: The target entity (reference) class for the one to one mapping element [field pizzaSize] is being defaulted to: class cs636.pizza.domain.PizzaSize.
+[EL Config]: metadata: The target entity (reference) class for the one to many mapping element [field pizzaToppings] is being defaulted to: class cs636.pizza.domain.PizzaTopping.
+[EL Config]: metadata: The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: The alias name for the entity class [class cs636.pizza.domain.PizzaTopping] is being defaulted to: PizzaTopping.
+[EL Config]: metadata: The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: The alias name for the entity class [class cs636.pizza.domain.PizzaOrder] is being defaulted to: PizzaOrder.
+[EL Config]: metadata: The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: The column name for element [day] is being defaulted to: DAY.
+[EL Config]: metadata: The column name for element [status] is being defaulted to: STATUS.
+[EL Config]: metadata: The primary key column name for the mapping element [field order] is being defaulted to: ID.
+[EL Config]: metadata: The primary key column name for the mapping element [field pizzaSize] is being defaulted to: ID.
+[EL Info]: EclipseLink, version: Eclipse Persistence Services - 2.7.0.v20170811-d680af5
+[EL Fine]: connection: Detected database platform: org.eclipse.persistence.platform.database.MySQLPlatform
+[EL Config]: connection: Connection(1088628578)--connecting(DatabaseLogin(
+	platform=>MySQLPlatform
+	user name=> "radhika"
+	datasource URL=> "jdbc:mysql://localhost:3333/radhikadb"
+))
+[EL Config]: connection: Connection(1864572141)--Connected: jdbc:mysql://localhost:3333/radhikadb
+	User: radhika@topcat.cs.umb.edu
+	Database: MySQL  Version: 5.7.20-0ubuntu0.16.04.1
+	Driver: MySQL Connector Java  Version: mysql-connector-java-5.1.43 ( Revision: 1d14b699eff3e6112aaedb1cbe5a151ab81f98f1 )
+[EL Info]: connection: /pizza2el login successful
+[EL Fine]: sql: Connection(1864572141)--delete from pizza_toppings
+[EL Fine]: sql: Connection(1864572141)--delete from pizza_orders
+[EL Fine]: sql: Connection(1864572141)--delete from pizza_sizes
+[EL Fine]: sql: Connection(1864572141)--delete from menu_toppings
+[EL Fine]: sql: Connection(1864572141)--delete from menu_sizes
+[EL Fine]: sql: Connection(1864572141)--delete from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--delete from pizza_id_gen
+[EL Fine]: sql: Connection(1864572141)--insert into pizza_sys_tab values (1,1,1,1,1,1)
+[EL Fine]: sql: Connection(1864572141)--insert into pizza_id_gen values ('Ordno_Gen', 0)
+[EL Fine]: sql: Connection(1864572141)--insert into pizza_id_gen values ('SizeId_Gen', 0)
+[EL Fine]: sql: Connection(1864572141)--insert into pizza_id_gen values ('ToppingId_Gen', 0)
+[EL Fine]: sql: Connection(1864572141)--insert into pizza_id_gen values ('MenuSizeId_Gen', 0)
+[EL Fine]: sql: Connection(1864572141)--insert into pizza_id_gen values ('MenuToppingId_Gen', 0)
+[EL Fine]: sql: Connection(1864572141)--UPDATE PIZZA_ID_GEN SET GEN_VAL = GEN_VAL + ? WHERE GEN_NAME = ?
+	bind => [50, MenuSizeId_Gen]
+[EL Fine]: sql: Connection(1864572141)--SELECT GEN_VAL FROM PIZZA_ID_GEN WHERE GEN_NAME = ?
+	bind => [MenuSizeId_Gen]
+[EL Fine]: sql: Connection(1864572141)--INSERT INTO MENU_SIZES (ID, SIZE_NAME) VALUES (?, ?)
+	bind => [1, small]
+[EL Fine]: sql: Connection(1864572141)--UPDATE PIZZA_ID_GEN SET GEN_VAL = GEN_VAL + ? WHERE GEN_NAME = ?
+	bind => [50, MenuToppingId_Gen]
+[EL Fine]: sql: Connection(1864572141)--SELECT GEN_VAL FROM PIZZA_ID_GEN WHERE GEN_NAME = ?
+	bind => [MenuToppingId_Gen]
+[EL Fine]: sql: Connection(1864572141)--INSERT INTO MENU_TOPPINGS (ID, TOPPING_NAME) VALUES (?, ?)
+	bind => [1, Pepperoni]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME FROM MENU_TOPPINGS
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM MENU_SIZES
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM MENU_SIZES WHERE (SIZE_NAME = ?)
+	bind => [small]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME FROM MENU_TOPPINGS WHERE (TOPPING_NAME = ?)
+	bind => [Pepperoni]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM MENU_SIZES WHERE (SIZE_NAME = ?)
+	bind => [small]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME FROM MENU_TOPPINGS WHERE (TOPPING_NAME = ?)
+	bind => [Pepperoni]
+[EL Fine]: sql: Connection(1864572141)--UPDATE PIZZA_ID_GEN SET GEN_VAL = GEN_VAL + ? WHERE GEN_NAME = ?
+	bind => [50, Ordno_Gen]
+[EL Fine]: sql: Connection(1864572141)--SELECT GEN_VAL FROM PIZZA_ID_GEN WHERE GEN_NAME = ?
+	bind => [Ordno_Gen]
+[EL Fine]: sql: Connection(1864572141)--UPDATE PIZZA_ID_GEN SET GEN_VAL = GEN_VAL + ? WHERE GEN_NAME = ?
+	bind => [50, ToppingId_Gen]
+[EL Fine]: sql: Connection(1864572141)--SELECT GEN_VAL FROM PIZZA_ID_GEN WHERE GEN_NAME = ?
+	bind => [ToppingId_Gen]
+[EL Fine]: sql: Connection(1864572141)--UPDATE PIZZA_ID_GEN SET GEN_VAL = GEN_VAL + ? WHERE GEN_NAME = ?
+	bind => [50, SizeId_Gen]
+[EL Fine]: sql: Connection(1864572141)--SELECT GEN_VAL FROM PIZZA_ID_GEN WHERE GEN_NAME = ?
+	bind => [SizeId_Gen]
+[EL Fine]: sql: Connection(1864572141)--INSERT INTO PIZZA_SIZES (ID, SIZE_NAME) VALUES (?, ?)
+	bind => [1, small]
+[EL Fine]: sql: Connection(1864572141)--INSERT INTO PIZZA_ORDERS (ID, DAY, room_number, STATUS, SIZE_ID) VALUES (?, ?, ?, ?, ?)
+	bind => [1, 1, 5, 1, 1]
+[EL Fine]: sql: Connection(1864572141)--INSERT INTO PIZZA_TOPPINGS (ID, TOPPING_NAME, ORDER_ID) VALUES (?, ?, ?)
+	bind => [1, Pepperoni, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME FROM MENU_TOPPINGS
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM MENU_SIZES
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM MENU_SIZES WHERE (SIZE_NAME = ?)
+	bind => [small]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME FROM MENU_TOPPINGS WHERE (TOPPING_NAME = ?)
+	bind => [Pepperoni]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM MENU_SIZES WHERE (SIZE_NAME = ?)
+	bind => [small]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME FROM MENU_TOPPINGS WHERE (TOPPING_NAME = ?)
+	bind => [Pepperoni]
+[EL Fine]: sql: Connection(1864572141)--INSERT INTO PIZZA_SIZES (ID, SIZE_NAME) VALUES (?, ?)
+	bind => [2, small]
+[EL Fine]: sql: Connection(1864572141)--INSERT INTO PIZZA_ORDERS (ID, DAY, room_number, STATUS, SIZE_ID) VALUES (?, ?, ?, ?, ?)
+	bind => [2, 1, 1, 1, 2]
+[EL Fine]: sql: Connection(1864572141)--INSERT INTO PIZZA_TOPPINGS (ID, TOPPING_NAME, ORDER_ID) VALUES (?, ?, ?)
+	bind => [2, Pepperoni, 2]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((room_number = ?) AND (DAY = ?)) ORDER BY ID
+	bind => [5, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME, ORDER_ID FROM PIZZA_TOPPINGS WHERE (ORDER_ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE (STATUS = ?) ORDER BY ID
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [2]
+[EL Fine]: sql: Connection(1864572141)--UPDATE PIZZA_ORDERS SET STATUS = ? WHERE (ID = ?)
+	bind => [2, 1]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((room_number = ?) AND (DAY = ?)) ORDER BY ID
+	bind => [5, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME, ORDER_ID FROM PIZZA_TOPPINGS WHERE (ORDER_ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((DAY >= ?) AND (DAY <= ?)) ORDER BY ID
+	bind => [1, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [2]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME, ORDER_ID FROM PIZZA_TOPPINGS WHERE (ORDER_ID = ?)
+	bind => [2]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((DAY >= ?) AND (DAY <= ?)) ORDER BY ID
+	bind => [1, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [2]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME, ORDER_ID FROM PIZZA_TOPPINGS WHERE (ORDER_ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((room_number = ?) AND (DAY = ?)) ORDER BY ID
+	bind => [5, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--UPDATE PIZZA_ORDERS SET STATUS = ? WHERE (ID = ?)
+	bind => [3, 1]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((room_number = ?) AND (DAY = ?)) ORDER BY ID
+	bind => [5, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME, ORDER_ID FROM PIZZA_TOPPINGS WHERE (ORDER_ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((DAY >= ?) AND (DAY <= ?)) ORDER BY ID
+	bind => [1, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [2]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, TOPPING_NAME, ORDER_ID FROM PIZZA_TOPPINGS WHERE (ORDER_ID = ?)
+	bind => [2]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((DAY >= ?) AND (DAY <= ?)) ORDER BY ID
+	bind => [1, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [2]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((DAY >= ?) AND (DAY <= ?)) ORDER BY ID
+	bind => [1, 1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [1]
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, SIZE_NAME FROM PIZZA_SIZES WHERE (ID = ?)
+	bind => [2]
+[EL Fine]: sql: Connection(1864572141)--UPDATE PIZZA_ORDERS SET STATUS = ? WHERE (ID = ?)
+	bind => [3, 2]
+[EL Fine]: sql: Connection(1864572141)--update pizza_sys_tab set current_day = current_day + 1
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((DAY >= ?) AND (DAY <= ?)) ORDER BY ID
+	bind => [2, 2]
+[EL Fine]: sql: Connection(1864572141)--select current_day from pizza_sys_tab
+[EL Fine]: sql: Connection(1864572141)--SELECT ID, DAY, room_number, STATUS, SIZE_ID FROM PIZZA_ORDERS WHERE ((DAY >= ?) AND (DAY <= ?)) ORDER BY ID
+	bind => [2, 2]
+[EL Config]: connection: Connection(1864572141)--disconnect
+[EL Info]: connection: /pizza2el logout successful
+[EL Config]: connection: Connection(1088628578)--disconnect

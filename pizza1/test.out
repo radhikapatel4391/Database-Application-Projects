@@ -1,0 +1,109 @@
+Buildfile: /courses/cs636/public_html/pizza1/build.xml
+
+init:
+
+build:
+     [echo] pizza1: /courses/cs636/public_html/pizza1/build.xml
+
+oraSysTest:
+     [java] Picked up _JAVA_OPTIONS: -Djava.security.egd=file:/dev/../dev/urandom
+     [java] 
+     [java] 
+     [java] *************ai***************
+     [java] 
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************so 5***************
+     [java] 
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************so 1***************
+     [java] 
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************ss 5***************
+     [java] 
+     [java] ----------Order Status--------------
+     [java] Order 1
+     [java] PREPARING
+     [java] Room 5
+     [java] Order's Toppings: Pepperoni 
+     [java] Order's Size: small
+     [java] -------------------------------------
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************anr***************
+     [java] 
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************ss 5***************
+     [java] 
+     [java] ----------Order Status--------------
+     [java] Order 1
+     [java] BAKED
+     [java] Room 5
+     [java] Order's Toppings: Pepperoni 
+     [java] Order's Size: small
+     [java] -------------------------------------
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************aip***************
+     [java] 
+     [java] ORDER ID: 2
+     [java] ORDER DAY: 1
+     [java] ROOM NUMBER: 1
+     [java] STATUS: PREPARING
+     [java] ---------------------
+     [java] ORDER ID: 1
+     [java] ORDER DAY: 1
+     [java] ROOM NUMBER: 5
+     [java] STATUS: BAKED
+     [java] ---------------------
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************sr 5***************
+     [java] 
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************ss 5***************
+     [java] 
+     [java] ----------Order Status--------------
+     [java] Order 1
+     [java] FINISHED
+     [java] Room 5
+     [java] Order's Toppings: Pepperoni 
+     [java] Order's Size: small
+     [java] -------------------------------------
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************aip***************
+     [java] 
+     [java] ORDER ID: 2
+     [java] ORDER DAY: 1
+     [java] ROOM NUMBER: 1
+     [java] STATUS: PREPARING
+     [java] ---------------------
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************aad***************
+     [java] 
+     [java] ----OK
+     [java] 
+     [java] 
+     [java] *************aip***************
+     [java] 
+     [java] ----OK
+     [java] Run complete, exiting
+
+BUILD SUCCESSFUL
+Total time: 1 second

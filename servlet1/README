@@ -1,0 +1,7 @@
+To use this project in eclipse, you need to add serlvet-api.jar
+to the Build Path as an "external JAR". Just browse to your
+tomcat-8.5/lib directory and find it there.
+
+Alternatively, use "Open Projects from File System...", then Directory, and
+choose the servlet1 directory. Then add servlet-api.jar to the project
+as above.

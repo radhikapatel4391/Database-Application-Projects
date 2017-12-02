@@ -1,0 +1,72 @@
+/*C1*/SET SCHEMA SYSTEM_LOBS
+INSERT INTO BLOCKS VALUES(0,2147483647,0)
+COMMIT
+/*C2*/SET SCHEMA PUBLIC
+ create table menu_sizes( id integer not null, size_name varchar(30) not null, primary key (id), unique (size_name))
+  create table pizza_sizes( id integer not null, size_name varchar(30) not null,  -- not unique: several pizzas may each be small\u000a primary key (id))
+  create table pizza_orders( id integer not null, room_number integer not null, size_id integer not null, day integer not null, status integer not null, primary key(id), constraint po_size_id foreign key (size_id) references pizza_sizes(id))
+  create table menu_toppings( id integer not null, topping_name varchar(30) not null, -- not unique: several pizzas may each have Onions\u000a primary key(id), unique (topping_name))
+  create table pizza_toppings( id integer not null, order_id integer not null, topping_name varchar(30) not null, primary key(id), foreign key (order_id) references pizza_orders(id))
+  create table pizza_sys_tab ( next_menu_topping_id integer not null, next_menu_size_id integer not null, next_order_id integer not null, next_pizza_topping_id integer not null, next_pizza_size_id integer not null, current_day integer not null)
+INSERT INTO PIZZA_SYS_TAB VALUES(1,1,1,1,1,1)
+COMMIT
+  CREATE TABLE PIZZA_ID_GEN (GEN_NAME VARCHAR(50) NOT NULL, GEN_VAL INTEGER, PRIMARY KEY (GEN_NAME))
+INSERT INTO PIZZA_ID_GEN VALUES('Ordno_Gen',0)
+INSERT INTO PIZZA_ID_GEN VALUES('SizeId_Gen',0)
+INSERT INTO PIZZA_ID_GEN VALUES('ToppingId_Gen',0)
+INSERT INTO PIZZA_ID_GEN VALUES('MenuSizeId_Gen',0)
+INSERT INTO PIZZA_ID_GEN VALUES('MenuToppingId_Gen',0)
+COMMIT
+DISCONNECT
+/*C3*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C4*/SET SCHEMA PUBLIC
+DELETE FROM PIZZA_SYS_TAB WHERE NEXT_MENU_TOPPING_ID=1 AND NEXT_MENU_SIZE_ID=1 AND NEXT_ORDER_ID=1 AND NEXT_PIZZA_TOPPING_ID=1 AND NEXT_PIZZA_SIZE_ID=1 AND CURRENT_DAY=1
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='MenuSizeId_Gen'
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='MenuToppingId_Gen'
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='Ordno_Gen'
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='SizeId_Gen'
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='ToppingId_Gen'
+INSERT INTO PIZZA_SYS_TAB VALUES(1,1,1,1,1,1)
+INSERT INTO PIZZA_ID_GEN VALUES('Ordno_Gen',0)
+INSERT INTO PIZZA_ID_GEN VALUES('SizeId_Gen',0)
+INSERT INTO PIZZA_ID_GEN VALUES('ToppingId_Gen',0)
+INSERT INTO PIZZA_ID_GEN VALUES('MenuSizeId_Gen',0)
+INSERT INTO PIZZA_ID_GEN VALUES('MenuToppingId_Gen',0)
+COMMIT
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='MenuSizeId_Gen'
+INSERT INTO PIZZA_ID_GEN VALUES('MenuSizeId_Gen',50)
+COMMIT
+INSERT INTO MENU_SIZES VALUES(1,'small')
+COMMIT
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='MenuToppingId_Gen'
+INSERT INTO PIZZA_ID_GEN VALUES('MenuToppingId_Gen',50)
+COMMIT
+INSERT INTO MENU_TOPPINGS VALUES(1,'Pepperoni')
+COMMIT
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='Ordno_Gen'
+INSERT INTO PIZZA_ID_GEN VALUES('Ordno_Gen',50)
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='ToppingId_Gen'
+INSERT INTO PIZZA_ID_GEN VALUES('ToppingId_Gen',50)
+DELETE FROM PIZZA_ID_GEN WHERE GEN_NAME='SizeId_Gen'
+INSERT INTO PIZZA_ID_GEN VALUES('SizeId_Gen',50)
+INSERT INTO PIZZA_SIZES VALUES(1,'small')
+INSERT INTO PIZZA_ORDERS VALUES(1,5,1,1,1)
+INSERT INTO PIZZA_TOPPINGS VALUES(1,1,'Pepperoni')
+COMMIT
+INSERT INTO PIZZA_SIZES VALUES(2,'small')
+INSERT INTO PIZZA_ORDERS VALUES(2,1,2,1,1)
+INSERT INTO PIZZA_TOPPINGS VALUES(2,2,'Pepperoni')
+COMMIT
+DELETE FROM PIZZA_ORDERS WHERE ID=1
+INSERT INTO PIZZA_ORDERS VALUES(1,5,1,1,2)
+COMMIT
+DELETE FROM PIZZA_ORDERS WHERE ID=1
+INSERT INTO PIZZA_ORDERS VALUES(1,5,1,1,3)
+COMMIT
+DELETE FROM PIZZA_ORDERS WHERE ID=2
+INSERT INTO PIZZA_ORDERS VALUES(2,1,2,1,3)
+DELETE FROM PIZZA_SYS_TAB WHERE NEXT_MENU_TOPPING_ID=1 AND NEXT_MENU_SIZE_ID=1 AND NEXT_ORDER_ID=1 AND NEXT_PIZZA_TOPPING_ID=1 AND NEXT_PIZZA_SIZE_ID=1 AND CURRENT_DAY=1
+INSERT INTO PIZZA_SYS_TAB VALUES(1,1,1,1,1,2)
+COMMIT
+DISCONNECT

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pizza2" default="build" basedir=".">
+<!--  CS636 pizza2 build file 
+  Requires environment variables ORACLE_USER, ORACLE_PW, ORACLE_SITE, 
+  MYSQL_USER, MYSQL_PW, MYSQL_SITE as in pizza1
+  Requires database tables set up: use build.xml in subdirectory database.
+  NOTE: don't try to use the pizza1 database here: reload everything first.
+  Most useful targets:
+  ant test   run all unit tests using HSQLDB
+  ant hsqlSysTest  run SystemTest with HSQLDB
+  ant oraSysTest  run SystemTest with Oracle (use tunnel at home)
+  ant mysqlSysTest  run SystemTest with Mysql (use tunnel at home)
+-->
+
+	<!-- Global properties for this build -->
+	<property environment="env" />
+	<property name="database.dir" value="database" />
+	<property name="src.dir" value="src" />
+	<property name="lib.dir" value="lib" />
+	<property name="classes.dir" value="bin" />
+	
+	<property name="ORACLE_URL" value="jdbc:oracle:thin:@${env.ORACLE_SITE}"/>
+	<property name="MYSQL_URL" value = "jdbc:mysql://${env.MYSQL_SITE}/${env.MYSQL_USER}db"/>
+	<property name="JAVAAGENT" value="-javaagent:lib/eclipselink.jar"/>
+	
+	<!-- Classpath declaration: all jars in lib -->
+	<path id="project.classpath">
+		<pathelement location="${classes.dir}" />
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="init">
+		<mkdir dir="${classes.dir}"/>
+		<!-- delete junit test output and JPA's generated SQL log -->
+		<delete>
+			<fileset dir="${basedir}">
+				<include name="TEST-*.txt" />
+				<include name="JpaGeneratedSQL.log" />
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- Clean up, including .class files-->
+	<target name="clean" depends="init" description="Clean up the derived files">
+		<delete dir="${classes.dir}" />
+	</target>
+
+	<!-- Compile Java source, requesting extra info on deprecated methods -->
+	<target name="build" depends="init">
+		<javac srcdir="${src.dir}" debug="on" destdir="${classes.dir}" 
+			classpathref="project.classpath" includeantruntime="false">
+			<compilerarg value="-Xlint:deprecation"/>
+		</javac>
+	</target>
+
+	<!-- use the power of ant to edit a file, substitute username, pw 
+		 to give us persistence.xml with current username, pw in it
+		 based on the enviroment variables ORACLE_USER, etc.
+		 These are helper targets. For running SystemTest, use
+		 "ant oraSysTest", etc. defined later in this file.
+	 -->
+	<target name="config-oradb">
+		<echo message="configuring project for Oracle, putting its persistence.xml on classpath"/>
+		<echo message="replacing username with ${env.ORACLE_USER}, password with ${env.ORACLE_PW}, also url "/>
+		<!-- and copy persistence.xml to src/META-INF for use from eclipse 
+		   (use project refresh, and set Properties>Java Persistence>Connection to Oracle)-->
+		<filter token="username" value="${env.ORACLE_USER}" />
+		<filter token="password" value="${env.ORACLE_PW}" />
+		<filter token="oracle_url" value="${ORACLE_URL}" />
+		<copy file="database/oracle/persistence.xml" todir="${src.dir}/META-INF" filtering="true" overwrite="true" />
+		<copy file="database/oracle/persistence.xml" todir="${classes.dir}/META-INF" filtering="true" overwrite="true" />
+	</target>
+	<target name="config-mysqldb">
+		<echo message="configuring project for MySql, putting its persistence.xml on classpath"/>
+		<echo message="replacing username with ${env.MYSQL_USER}, password with ${env.MYSQL_PW}"/>
+		<!-- and copy persistence.xml to src/META-INF for use from eclipse 
+	      (use project refresh, and set Properties>Java Persistence>Connection to None,
+	      to avoid useless validation errors caused by case sensitivity problem)-->
+		<filter token="username" value="${env.MYSQL_USER}" />
+		<filter token="password" value="${env.MYSQL_PW}" />
+		<filter token="mysql_url" value="${MYSQL_URL}" />
+		<copy file="database/mysql/persistence.xml" todir="${src.dir}/META-INF" filtering="true" overwrite="true" />
+		<copy file="database/mysql/persistence.xml" todir="${classes.dir}/META-INF" filtering="true" overwrite="true" />
+	</target>
+	<target name="config-hsqldb">
+		<echo message="configuring project for HSQLDB, putting its persistence.xml on classpath"/>
+		<!-- copy hsql version of persistence.xml (no fixup needed) to classpath -->
+		<!-- and copy it to src/META-INF for use from eclipse 
+		     (use project refresh, and set Properties>Java Persistence>Connection to HSQLDB)-->
+		<copy file="database/hsql/persistence.xml" todir="${src.dir}/META-INF" overwrite="true" />
+		<copy file="database/hsql/persistence.xml" todir="${classes.dir}/META-INF" overwrite="true" />
+	</target>
+
+	<!--check that one of the above config targets has been used -->
+	<target name="configCheck">
+		<available file="${classes.dir}/META-INF/persistence.xml" property="configOK" />
+		<fail message="No persistence.xml on classpath/META-INF. Use ant config-hsqldb, config-mysqldb, or config-oradb" unless="configOK" />
+		<echo message="configCheck: OK, found persistence.xml on classpath/META-INF"/>
+	</target>
+	<!-- default to testing with HSQLDB: run all unit tests -->
+	<target name="test" depends="init, config-hsqldb, testBL, testDAO"/>
+	<!-- set up "testBL" to run all BL (business layer) unit tests -->
+	<!-- Note that you can run testBL and testDAO with Oracle or MySQL as well as HSQLDB:
+	     (use ant config-mysqldb or ant config-oradb first) -->
+	<target name="testBL" depends="init, build, configCheck">
+		<echo message="testBL business layer testing"/>
+		<echo message="...look for JUnit details in TEST-*.txt"/>
+		<echo message="...look for JPA-generated SQL in JpaGeneratedSql.log"/>
+		<junit fork="true" printsummary="yes">
+		    <jvmarg value="${JAVAAGENT}"/>
+			<formatter type="brief"/>
+			<test name="cs636.pizza.service.AdminServiceTest1"/>
+			<classpath refid="project.classpath"/>
+		</junit>
+	</target>
+	<!-- set up one target "testDAO" to run all DAO unit tests, using batchtest -->
+	<target name="testDAO" depends="build">
+		<echo message="testDAO DAO testing"/>
+		<echo message="...look for JUnit details in TEST-*.txt"/>
+		<echo message="...look for JPA-generated SQL in JpaGeneratedSql.log"/>
+		<junit fork="true" printsummary="yes">
+			<jvmarg value="${JAVAAGENT}"/>
+			<formatter type="brief"/>
+			<classpath refid="project.classpath" />
+			<batchtest fork="yes">
+				<fileset dir="${src.dir}">
+					<include name="**/dao/*Test*.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<!-- Run SystemTest using Oracle, Mysql, or HSQLDB -->
+	<target name="oraSysTest" depends="init, build, config-oradb">
+		<echo message="running SystemTest on Oracle"/>
+		<echo message="...look for JPA-generated SQL in JpaGeneratedSql.log"/>
+		<java fork="true" classname="cs636.pizza.presentation.SystemTest" failonerror="true">
+			<classpath refid="project.classpath" />
+			<jvmarg value="${JAVAAGENT}"/>
+			<arg file="test.dat" />	
+		</java>
+	</target>
+	<target name="mysqlSysTest" depends="init, build, config-mysqldb">
+		<echo message="running SystemTest on mysql"/>
+		<echo message="...look for JPA-generated SQL in JpaGeneratedSql.log"/>
+		<java fork="true" classname="cs636.pizza.presentation.SystemTest" failonerror="true">
+			<classpath refid="project.classpath" />
+			<jvmarg value="${JAVAAGENT}"/>
+			<arg file="test.dat" />	
+		</java>
+	</target>
+	<target name="hsqlSysTest" depends="init, build, config-hsqldb">
+		<echo message="running SystemTest on HSQLDB"/>
+		<echo message="...look for JPA-generated SQL in JpaGeneratedSql.log"/>
+		<java fork="true" classname="cs636.pizza.presentation.SystemTest" failonerror="true">
+			<classpath refid="project.classpath" />
+			<jvmarg value="${JAVAAGENT}"/>
+			<arg file="test.dat" />	
+		</java>
+	</target>
+
+	<!--Rerun SystemTest using the same database as before-->
+	<target name="sysTest" depends="init, build, configCheck">
+		<echo message="running SystemTest again"/>
+		<echo message="...look for JPA-generated SQL in JpaGeneratedSql.log"/>
+		<java fork="true" classname="cs636.pizza.presentation.SystemTest" failonerror="true">
+			<classpath refid="project.classpath" />
+			<jvmarg value="${JAVAAGENT}"/>
+			<arg file="test.dat" />	
+		</java>
+	</target>
+</project>

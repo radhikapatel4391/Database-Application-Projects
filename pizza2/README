@@ -1,0 +1,28 @@
+
+Note: to run this project with HSQLDB (easiest way):
+1. Start the HSQLDB server as explained in JdbcCheckup.java or use
+   "ant start-hsqldb" after cd'ing to the database directory here.
+   
+2. "ant load-hsqldb" (or "ant drop-hsqldb" followed by "ant load-hsqldb"
+ if hsqldb is already running)
+   
+3. Use "ant hsqlSysTest" to run SystemTest, and "ant test" to run JUnit tests
+
+To use a real DB: you need to define environment variables as discussed in build.xml
+ For Oracle database, set up env variables ORACLE_USER, ORACLE_PW, ORACLE_SITE
+  For MySQL use, set up env vars MYSQL_USER, MYSQL_PW, MYSQL_SITE
+For Linux at cs.umb.edu, put these lines in your .profile:
+# change these to fit your accounts--
+ORACLE_USER=xxxx; export ORACLE_USER
+ORACLE_PW=xxxx; export ORACLE_PW
+ORACLE_SITE=dbs3.cs.umb.edu:1521:dbs3; export ORACLE_SITE
+MYSQL_USER=xxxx; export MYSQL_USER
+MYSQL_PW=xxxx; export MYSQL_PW
+MYSQL_SITE=topcat.cs.umb.edu; export MYSQL_SITE
+export _JAVA_OPTIONS=-Djava.security.egd=file:/dev/../dev/urandom
+
+The last export is a workaround for a system problem in 64-bit Linux that
+causes "Connection reset" failures in JDBC connections to Oracle.
+
+Also, reload the pizza database: the createdb.sql has changed
+

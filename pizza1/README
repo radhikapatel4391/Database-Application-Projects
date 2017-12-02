@@ -1,0 +1,41 @@
+Thanks to Saaid Baraty for the solid basis for the pizza1 solution.
+Edited by Betty O'Neil mainly to simplify the implementation.
+Note: to run this project on UNIX/Linux with HSQLDB (easiest way):
+1. Start the HSQLDB server as explained in JdbcCheckup.java or use
+   "ant start-hsqldb" after cd'ing to the database directory here.
+   then "ant load-hsqldb"
+   
+2. Use "ant hsqlSysTest" when cd'd to this directory
+
+To use a real DB: you need to define environment variables as discussed in build.xml
+ For Oracle database, set up env variables ORACLE_USER, ORACLE_PW, ORACLE_SITE
+  For MySQL use, set up env vars MYSQL_USER, MYSQL_PW, MYSQL_SITE
+For Linux at cs.umb.edu, put these lines in your .profile:
+# change these to fit your accounts--
+export ORACLE_USER=xxxx
+export ORACLE_PW=xxxx
+export ORACLE_SITE=dbs2.cs.umb.edu:1521:dbs2
+export MYSQL_USER=xxxx
+export MYSQL_PW=xxxx
+export MYSQL_SITE=topcat.cs.umb.edu
+
+Actions that can be performed by system:
+
+ 1- Student Actions:
+  
+       a- Order a Pizza.
+       b- Ask for status of Pizza
+       c- Acknowledge receipt of a baked pizza
+
+ 2- Administrative actions:
+      
+      a- Build the system from scratch with new tables.
+      b- Initialize the system from stored tables in database (Six tables) 
+      c- Add new Topping
+      d- Delete Topping
+      e- Add new pizza Size
+      f- Delete pizza Size
+      g- Advance the Day
+      h- make Next order Ready
+      i- Report on in-progress orders
+ 
