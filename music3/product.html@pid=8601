@@ -1,0 +1,107 @@
+
+
+<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Online Music Store</title>
+<link rel="shortcut icon" href="/music3/images/logo.jpg;jsessionid=A020F3C13038A09496333BABF8146E75">
+<link rel="stylesheet" href="/music3/styles/main.css;jsessionid=A020F3C13038A09496333BABF8146E75 ">
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+</head>
+
+<body>
+
+	<header>
+		<img src="/music3/images/logo.jpg;jsessionid=A020F3C13038A09496333BABF8146E75"
+			alt="Music  Logo" width="58">
+		<h1>Online Music Store</h1>
+		<h2>Quality Sounds Served Up Fresh!</h2>
+	</header>
+	<nav id="nav_bar">
+		<ul>
+			<li><a href="/music3/adminController/listVariables.html;jsessionid=A020F3C13038A09496333BABF8146E75">
+					Admin</a></li>
+
+
+
+
+
+
+
+
+
+			<li><a href="/music3/cart.html;jsessionid=A020F3C13038A09496333BABF8146E75"> Show Cart</a></li>
+		</ul>
+	</nav>
+
+
+
+	
+
+<aside id="sidebarA">
+    <nav>
+    
+      <ul>
+          <li><a class="current" href="/music3/;jsessionid=A020F3C13038A09496333BABF8146E75">
+                  Home</a></li>
+          <li><a href = "/music3/catalog.html;jsessionid=A020F3C13038A09496333BABF8146E75">
+                  Browse Catalog</a></li>          
+      </ul>
+    </nav>
+</aside>
+
+
+
+<!-- start the middle column -->
+
+<section>
+	<img src="/music3/images/8601_cover.jpg;jsessionid=A020F3C13038A09496333BABF8146E75"
+			alt="Fresh Corn Records Logo" width="175" height="175">
+	
+		<p>86 (the band) - True Life Songs and Pictures</p>
+		<p>Price: 14.95</p>
+
+	
+	
+		
+
+		
+			<p class="clear_both">The debut album from 86 (the band), True
+				Life Songs and Pictures rocks and twangs in equal measure. Filled
+				with banjo, one-string bass, fiddle, and 3-part harmonies, this
+				semi-rock, semi-country, semi-bluegrass album covers a lot of
+				ground. "How to Get There" is a rambling epic that unleashes a
+				rapid-fire lyrical barrage while "Don't Close Your Eyes" and
+				"Morning Sun" are more melancholy and bittersweet.</p>
+		
+
+		
+
+		
+		
+	
+
+</section>
+
+<!-- end the middle column -->
+
+<aside id="sidebarB">
+        <form method="post" action="/music3/addItemTOCart.html;jsessionid=A020F3C13038A09496333BABF8146E75">
+            <input type="hidden" name="productId" value="1">
+            <input type="image" src="/music3/images/addtocart.gif;jsessionid=A020F3C13038A09496333BABF8146E75" 
+                   width="113" alt="Add to Cart">
+        </form>
+        <form method="get" action="/music3/sound.html;jsessionid=A020F3C13038A09496333BABF8146E75">
+            <input type="hidden" name="productcode" value="8601">
+            <input class="top_margin" type="image" src="/music3/images/listen.gif;jsessionid=A020F3C13038A09496333BABF8146E75" 
+                   width="113" alt="Listen to Samples">
+        </form>
+        
+    </aside>
+    <footer >
+         <p>Copyright &copy; 2017 Radhika Patel</p> 
+    </footer>
+</body>
+</html>
